@@ -1,0 +1,90 @@
+// ── Clinic Appointment & Diagnostics Platform ──
+
+Specialty [icon: tag, color: purple] {
+  specialty_id INT [pk]
+  name VARCHAR(100)
+  description VARCHAR(255)
+}
+
+Doctor [icon: user, color: blue] {
+  doctor_id INT [pk]
+  specialty_id INT [fk]
+  name VARCHAR(100)
+  phone VARCHAR(15)
+  email VARCHAR(100)
+}
+
+Patient [icon: users, color: green] {
+  patient_id INT [pk]
+  name VARCHAR(100)
+  dob DATE
+  gender CHAR(1)
+  phone VARCHAR(15)
+  email VARCHAR(100)
+  address VARCHAR(255)
+}
+
+Appointment [icon: calendar, color: yellow] {
+  appointment_id INT [pk]
+  patient_id INT [fk]
+  doctor_id INT [fk]
+  scheduled_at DATETIME
+  status VARCHAR(20)
+  reason VARCHAR(255)
+}
+
+Consultation [icon: clipboard, color: orange] {
+  consultation_id INT [pk]
+  appointment_id INT [fk]
+  consultation_date DATE
+  notes TEXT
+  diagnosis VARCHAR(255)
+}
+
+DiagnosticTest [icon: activity, color: red] {
+  test_id INT [pk]
+  test_name VARCHAR(100)
+  category VARCHAR(50)
+  description VARCHAR(255)
+  base_price DECIMAL(10,2)
+}
+
+PrescribedTest [icon: file-text, color: pink] {
+  prescription_id INT [pk]
+  consultation_id INT [fk]
+  test_id INT [fk]
+  instructions VARCHAR(255)
+  status VARCHAR(20)
+}
+
+Report [icon: file, color: teal] {
+  report_id INT [pk]
+  prescription_id INT [fk]
+  reviewed_by INT [fk]
+  generated_at DATETIME
+  result_summary TEXT
+  result_status VARCHAR(20)
+}
+
+Payment [icon: credit-card, color: gray] {
+  payment_id INT [pk]
+  appointment_id INT [fk]
+  amount DECIMAL(10,2)
+  method VARCHAR(30)
+  status VARCHAR(20)
+  paid_at DATETIME
+}
+
+// ── Relationships ──
+
+Specialty.specialty_id < Doctor.specialty_id
+Patient.patient_id < Appointment.patient_id 
+Doctor.doctor_id < Appointment.doctor_id 
+
+Appointment.appointment_id - Consultation.appointment_id 
+Appointment.appointment_id - Payment.appointment_id 
+
+Consultation.consultation_id < PrescribedTest.consultation_id 
+DiagnosticTest.test_id < PrescribedTest.test_id 
+PrescribedTest.prescription_id - Report.prescription_id 
+Doctor.doctor_id < Report.reviewed_by 
