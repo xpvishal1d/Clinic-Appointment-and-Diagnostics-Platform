@@ -26,8 +26,8 @@ An entity-relationship diagram for a clinic management system covering appointme
 
 ## Files
 
-- `clinic_erd.eraser` — source diagram file (Eraser.io)
-- `clinic_erd.png` — exported image of the diagram
+- `clinic_erd.eraser` — source diagram file (Eraser.io) [link](https://app.eraser.io/workspace/2zzPB2C7mFeYkNRx4Ldg)
+- `clinic_erd.png` — exported image of the diagram [link](https://github.com/xpvishal1d/Clinic-Appointment-and-Diagnostics-Platform/blob/main/diagram-export-08-04-2026-22_01_20.png)
 
 ## Tools Used
 
